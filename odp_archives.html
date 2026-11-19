@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101820">
+<title>ODP Archives — The Birth, Glory & Fall of a Nation</title>
+<style>
+:root{
+  --bg:#0b1118;--panel:#121c27;--panel2:#172432;--line:#2a3b4c;
+  --text:#e9eef3;--muted:#9aabba;--gold:#d5ad68;--red:#bd625c;
+  --blue:#789bb8;--serif:Georgia,"Times New Roman",serif;
+  --sans:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.7}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.topbar{position:sticky;top:0;z-index:10;background:rgba(11,17,24,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{max-width:1180px;margin:auto;padding:15px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.13em;font-size:.85rem}
+.crest{width:35px;height:35px;border:1px solid var(--gold);display:grid;place-items:center;color:var(--gold);font-family:var(--serif);font-size:1.1rem}
+.navlinks{display:flex;gap:22px;color:var(--muted);font-size:.82rem}
+.navlinks a:hover{color:var(--gold)}
+.menu-btn{display:none;background:none;color:var(--text);border:1px solid var(--line);padding:7px 10px}
+.hero{min-height:590px;display:flex;align-items:center;position:relative;overflow:hidden;border-bottom:1px solid var(--line);background:radial-gradient(ellipse at 80% 30%,rgba(103,126,143,.22),transparent 38%),linear-gradient(120deg,#101a25 0%,#0b1118 65%)}
+.hero:after{content:"ODP";position:absolute;right:4vw;bottom:-.28em;font-family:var(--serif);font-size:clamp(13rem,34vw,31rem);font-weight:bold;color:rgba(213,173,104,.045);line-height:1;pointer-events:none}
+.hero-inner{max-width:1180px;width:100%;margin:auto;padding:90px 24px;position:relative;z-index:1}
+.kicker,.eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.2em;font-size:.72rem;font-weight:700}
+h1{font:500 clamp(3.1rem,8vw,6.8rem)/.98 var(--serif);max-width:850px;margin:24px 0}
+h1 span{color:var(--gold);font-style:italic}
+.hero-copy{max-width:620px;color:#b5c2ce;font-size:1.05rem}
+.hero-meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:42px;color:var(--muted);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase}
+.hero-meta strong{display:block;color:var(--text);font-size:.95rem;letter-spacing:0;margin-top:5px}
+main{max-width:1180px;margin:auto;padding:70px 24px}
+.intro{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-bottom:90px}
+.intro h2,.section-heading h2{font:500 clamp(2.2rem,5vw,3.5rem)/1.1 var(--serif);margin:12px 0}
+.intro p{color:var(--muted);margin:0}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+.stat{background:var(--panel);border:1px solid var(--line);padding:18px}
+.stat b{display:block;color:var(--gold);font:2rem var(--serif)}
+.stat span{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+.section-heading{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:34px}
+.section-heading p{max-width:390px;color:var(--muted);font-size:.9rem;margin:0}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+.search{flex:1;min-width:220px;background:var(--panel);border:1px solid var(--line);color:var(--text);padding:12px 15px;outline:none}
+.search:focus{border-color:var(--gold)}
+.filter{background:transparent;border:1px solid var(--line);color:var(--muted);padding:10px 14px;cursor:pointer;font-size:.8rem}
+.filter.active,.filter:hover{border-color:var(--gold);color:var(--gold)}
+.timeline{position:relative;margin-left:10px}
+.timeline:before{content:"";position:absolute;left:15px;top:8px;bottom:0;width:1px;background:var(--line)}
+.event{display:grid;grid-template-columns:32px 145px 1fr;gap:22px;position:relative;padding:0 0 38px}
+.dot{width:11px;height:11px;background:var(--gold);border:3px solid var(--bg);outline:1px solid var(--gold);border-radius:50%;margin:8px 0 0 10px;z-index:1}
+.event-year{color:var(--gold);font-size:.73rem;letter-spacing:.14em;text-transform:uppercase;padding-top:4px}
+.event-card{background:var(--panel);border:1px solid var(--line);padding:25px 28px;transition:.2s}
+.event-card:hover{border-color:#66798a;transform:translateY(-2px)}
+.event-card h3{font:1.65rem var(--serif);margin:0 0 10px}
+.event-card p{color:var(--muted);margin:0 0 12px;font-size:.94rem}
+.event-card p:last-child{margin-bottom:0}
+.tag{display:inline-block;color:var(--gold);font-size:.66rem;text-transform:uppercase;letter-spacing:.13em;border:1px solid #66543a;padding:4px 8px;margin-bottom:12px}
+.quote{border-left:2px solid var(--gold);padding:14px 20px;margin:18px 0;background:var(--panel2);font:italic 1.2rem/1.5 var(--serif);color:#e7d6b9}
+.people{margin-top:85px}
+.people-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.person{background:var(--panel);border:1px solid var(--line);padding:19px}
+.person h3{font:1.2rem var(--serif);margin:0 0 5px}
+.person p{font-size:.8rem;color:var(--muted);margin:0}
+.notice{margin-top:70px;padding:25px 28px;border:1px solid #66543a;background:linear-gradient(110deg,rgba(213,173,104,.08),transparent)}
+.notice h3{font:1.35rem var(--serif);margin:0 0 8px;color:var(--gold)}
+.notice p{color:var(--muted);font-size:.87rem;margin:0}
+footer{border-top:1px solid var(--line);padding:30px 24px;color:var(--muted);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+.footer-inner{max-width:1180px;margin:auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.empty{color:var(--muted);padding:25px;border:1px dashed var(--line);display:none}
+@media(max-width:760px){
+ .navlinks{display:none;position:absolute;top:66px;left:0;right:0;background:var(--panel);padding:18px 24px;border-bottom:1px solid var(--line);flex-direction:column;gap:14px}
+ .navlinks.open{display:flex}.menu-btn{display:block}
+ .hero{min-height:520px}.hero-inner{padding:75px 24px}
+ .intro{grid-template-columns:1fr;gap:25px;margin-bottom:65px}
+ .section-heading{display:block}.section-heading p{margin-top:12px}
+ .event{grid-template-columns:32px 1fr;gap:12px;padding-bottom:24px}
+ .event-year{grid-column:2}.event-card{grid-column:2;padding:20px}
+ .people-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:420px){.stat-grid{grid-template-columns:1fr}.people-grid{grid-template-columns:1fr 1fr}.hero-meta{gap:18px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+ <nav class="nav">
+  <a class="brand" href="#top"><span class="crest">O</span><span>ODP ARCHIVES</span></a>
+  <button class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+  <div class="navlinks" id="navlinks">
+   <a href="#overview">OVERVIEW</a><a href="#timeline">TIMELINE</a><a href="#people">KEY FIGURES</a><a href="#legacy">LEGACY</a>
+  </div>
+ </nav>
+</header>
+<section class="hero" id="top">
+ <div class="hero-inner">
+  <div class="kicker">Historical record · ODP archives</div>
+  <h1>The Birth, Glory<br>&amp; <span>Fall</span> of a Nation</h1>
+  <p class="hero-copy">The complete history of the Omran Democratic Party — from a small Fortnite community to an empire of 25 territories, and the divisions that brought it down.</p>
+  <div class="hero-meta">
+   <div>Subject<strong>Omran Democratic Party</strong></div>
+   <div>Record<strong>Political history</strong></div>
+   <div>Chapters<strong>10 parts</strong></div>
+  </div>
+ </div>
+</section>
+<main>
+ <section class="intro" id="overview">
+  <div><div class="eyebrow">The story at a glance</div><h2>An organisation built by friends. Changed by power.</h2></div>
+  <div>
+   <p>ODP began with four people and a shared Fortnite community. Over time, it developed its own leadership, ministers, parliament, military structures, territory and ideology. Its story is marked by ambition, loyalty, betrayal and political collapse.</p>
+   <div class="stat-grid">
+    <div class="stat"><b>4</b><span>Original founders</span></div>
+    <div class="stat"><b>25</b><span>Territories at its height</span></div>
+    <div class="stat"><b>10</b><span>Historical chapters</span></div>
+   </div>
+  </div>
+ </section>
+ <section id="timeline">
+  <div class="section-heading">
+   <div><div class="eyebrow">From beginning to aftermath</div><h2>The ODP timeline</h2></div>
+   <p>Explore the defining moments. Search by person, event or keyword, or filter the story by era.</p>
+  </div>
+  <div class="controls">
+   <input class="search" id="search" type="search" placeholder="Search the archive…" aria-label="Search timeline">
+   <button class="filter active" data-filter="all">All chapters</button>
+   <button class="filter" data-filter="rise">The rise</button>
+   <button class="filter" data-filter="decline">The decline</button>
+   <button class="filter" data-filter="fall">The fall</button>
+  </div>
+  <div class="timeline" id="timelineList">
+   <article class="event" data-era="rise">
+    <div class="dot"></div><div class="event-year">Chapter 01</div>
+    <div class="event-card"><span class="tag">The beginning</span><h3>The Birth of ODP — The First Regime</h3>
+     <p>ODP's history began with Omran Omer, Toni Sadriu, Behrad Riazati and the early members of their Fortnite community. What started as friends playing together gradually developed into a political system.</p>
+     <p>Toni Sadriu became the first supreme leader. After roughly a year, corruption and political tensions grew. Omran launched a rebellion, overthrew Toni's government and imprisoned him. Later, Omran released Toni, allowing him to return to politics. Behrad, once Toni's loyal assistant, remained an important early figure.</p>
+    </div>
+   </article>
+   <article class="event" data-era="rise">
+    <div class="dot"></div><div class="event-year">April 20</div>
+    <div class="event-card"><span class="tag">Turning point</span><h3>The Night of Chaos</h3>
+     <p>Behrad Riazati, previously one of Toni's closest assistants, changed political sides and betrayed him. The event reshaped relationships among the original leadership. After his release, Toni joined Omran's newly established Omran Democratic Party.</p>
+    </div>
+   </article>
+   <article class="event" data-era="rise">
+    <div class="dot"></div><div class="event-year">Chapter 03</div>
+    <div class="event-card"><span class="tag">Golden age</span><h3>The Golden Age of Omran</h3>
+     <p>Under Omran's leadership, ODP expanded its government and brought new members into leadership and parliament. Toni returned as an influential figure. Simon Nilsen Sebastian became Minister of Attack, while Toni Sadriu became Minister of Defence.</p>
+     <p>The organisation appeared united and powerful, and its institutions became increasingly established.</p>
+    </div>
+   </article>
+   <article class="event" data-era="rise">
+    <div class="dot"></div><div class="event-year">Chapter 04</div>
+    <div class="event-card"><span class="tag">Expansion</span><h3>The Expansion of the ODP Empire</h3>
+     <p>Omran's ambitions reached beyond the original nation. ODP spread its influence into new territories and, at its height, controlled approximately 25 countries. Its economy and political reach grew to unprecedented levels within the storyline.</p>
+    </div>
+   </article>
+   <article class="event" data-era="decline">
+    <div class="dot"></div><div class="event-year">Chapter 05</div>
+    <div class="event-card"><span class="tag">Authoritarian turn</span><h3>The Beginning of the Dictatorship</h3>
+     <p>Over time, Omran became increasingly paranoid. Freedom of speech was restricted, criticism was no longer tolerated, and the democratic principles that had shaped ODP began to disappear.</p>
+     <div class="quote">“You have freedom of speech, but I can't guarantee freedom after speech.”</div>
+     <p>Stories about the treatment of political opponents — including rumours about prisoners and Omran's lions — contributed to the regime's frightening reputation. These darker stories remain unverified within the narrative.</p>
+    </div>
+   </article>
+   <article class="event" data-era="decline">
+    <div class="dot"></div><div class="event-year">Chapter 06</div>
+    <div class="event-card"><span class="tag">Growing opposition</span><h3>The Betrayal of Simon and the Rise of the Rebels</h3>
+     <p>Sarunas became a prominent opponent and formed a rebel organisation. Simon Nilsen Sebastian, formerly Minister of Attack, joined the rebellion. Khurram Hayat also aligned with the opposition after losing his assistant position. Marius Johansen became associated with the rebels, though the details were unclear.</p>
+     <p>Toni remained an important insider, increasingly concerned about ODP's direction, while Behrad had returned to a position of loyalty. The government began to fracture from within.</p>
+    </div>
+   </article>
+   <article class="event" data-era="decline">
+    <div class="dot"></div><div class="event-year">Chapter 07</div>
+    <div class="event-card"><span class="tag">Failed restoration</span><h3>The Failed Democratic Restoration</h3>
+     <p>Toni and Behrad attempted to restore democratic principles through elections. Behrad won the presidential election, but Omran refused to recognise the result and prevented him from taking office. The election exposed how little independence ODP's democratic institutions retained.</p>
+    </div>
+   </article>
+   <article class="event" data-era="fall">
+    <div class="dot"></div><div class="event-year">Chapter 08</div>
+    <div class="event-card"><span class="tag">Civil conflict</span><h3>The Final Collapse</h3>
+     <p>Toni left ODP and established a separate movement. Khurram Hayat, Marius Johansen and Sarunas Smitides joined him. Conflict escalated, and ODP — once a powerful organisation with around 25 territories — struggled to survive. Its political unity had disappeared.</p>
+    </div>
+   </article>
+   <article class="event" data-era="fall">
+    <div class="dot"></div><div class="event-year">Chapter 09</div>
+    <div class="event-card"><span class="tag">Unfinished ending</span><h3>Operation Omran's Capture</h3>
+     <p>As the conflict reached its final stages, an operation was initiated to locate and capture Omran Omer. The operation was never completed. Within the ODP storyline, Omran's whereabouts remain unknown — one of its greatest unanswered questions.</p>
+    </div>
+   </article>
+   <article class="event" data-era="fall">
+    <div class="dot"></div><div class="event-year">Chapter 10</div>
+    <div class="event-card"><span class="tag">Historical legacy</span><h3>The Legacy of ODP</h3>
+     <p>ODP began as a group of friends and became an elaborate political world of governments, elections, ministers, territorial expansion and international conflicts. Its ambition and concentration of power eventually undermined the unity and democratic ideals on which it was founded.</p>
+     <p>It was once an empire of 25 territories. Now, it remains a memory of what it once was.</p>
+    </div>
+   </article>
+  </div>
+  <div class="empty" id="empty">No chapters match your search. Try another keyword.</div>
+ </section>
+ <section class="people" id="people">
+  <div class="section-heading"><div><div class="eyebrow">The people behind the story</div><h2>Key figures</h2></div><p>The central characters whose alliances, decisions and rivalries shaped ODP's history.</p></div>
+  <div class="people-grid">
+   <div class="person"><h3>Omran Omer</h3><p>Rebel leader, founder of the later movement and central figure of ODP's rise and fall.</p></div>
+   <div class="person"><h3>Toni Sadriu</h3><p>First supreme leader, later Minister of Defence and leader of the breakaway movement.</p></div>
+   <div class="person"><h3>Behrad Riazati</h3><p>Early assistant, shifting political ally and winner of the disputed presidential election.</p></div>
+   <div class="person"><h3>Simon Nilsen Sebastian</h3><p>Former Minister of Attack who later joined the rebellion.</p></div>
+   <div class="person"><h3>Sarunas Smitides</h3><p>Prominent opposition figure and founder of a rebel organisation.</p></div>
+   <div class="person"><h3>Khurram Hayat</h3><p>Former assistant who aligned with the opposition.</p></div>
+   <div class="person"><h3>Marius Johansen</h3><p>Relatively neutral figure later associated with the rebellion.</p></div>
+  </div>
+ </section>
+ <section class="notice" id="legacy">
+  <h3>Historical note</h3>
+  <p>This archive presents the ODP storyline and the accounts provided. Some events — particularly rumours surrounding Omran's rule — are unverified within the narrative. The events are presented as part of this fictional/personal political world, not as independently verified real-world history.</p>
+ </section>
+</main>
+<footer><div class="footer-inner"><span>Historical record · ODP archives</span><span>The end of an era</span></div></footer>
+<script>
+const search = document.getElementById('search');
+const cards = [...document.querySelectorAll('.event')];
+const filters = [...document.querySelectorAll('.filter')];
+const empty = document.getElementById('empty');
+let active = 'all';
+function update(){
+ const q = search.value.trim().toLowerCase();
+ let shown = 0;
+ cards.forEach(card=>{
+  const matchesText = card.innerText.toLowerCase().includes(q);
+  const matchesEra = active === 'all' || card.dataset.era === active;
+  const visible = matchesText && matchesEra;
+  card.style.display = visible ? 'grid' : 'none';
+  if(visible) shown++;
+ });
+ empty.style.display = shown ? 'none' : 'block';
+}
+search.addEventListener('input', update);
+filters.forEach(btn=>btn.addEventListener('click',()=>{
+ active=btn.dataset.filter;
+ filters.forEach(b=>b.classList.toggle('active',b===btn));
+ update();
+}));
+document.getElementById('menuBtn').addEventListener('click',()=>{
+ document.getElementById('navlinks').classList.toggle('open');
+});
+document.querySelectorAll('.navlinks a').forEach(a=>a.addEventListener('click',()=>{
+ document.getElementById('navlinks').classList.remove('open');
+}));
+</script>
+</body>
+</html>
